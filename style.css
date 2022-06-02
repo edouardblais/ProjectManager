@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 30vw;
+    width: 20vw;
     height: 100vh;
 }
 
@@ -21,14 +21,30 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 70vw;
+    width: 80vw;
     height: 100vh;
 }
 
-.taskprioritybuttonoff {
+.projectbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.taskbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.listedtasks {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.prioritylow {
     background-color: pink;
 }
 
-.taskprioritybuttonon {
+.priorityhigh {
     background-color: red;
 }
