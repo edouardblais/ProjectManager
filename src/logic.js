@@ -1,3 +1,5 @@
+import { addTask } from "./dom.js";
+
 let projectlist = [];
 let tasklist = [];
 let priority = 2;
@@ -25,24 +27,25 @@ const Task = (title, description, responsible, priority, dategiven, duedate, che
 };
 
 function priorityToggle() {
-    const prioritybutton = document.querySelector('.taskprioritybuttonoff');
-    prioritybutton.addEventListener('click', () => {
-        if (prioritybutton.classList === 'taskprioritybuttonoff') {
+    const prioritybutton = document.getElementById('taskprioritybutton');
+    prioritybutton.addEventListener(('click'), () => {
+        if (prioritybutton.classList == 'taskprioritybuttonoff') {
+            prioritybutton.innerText = 'High';
             prioritybutton.classList.add('taskprioritybuttonon');
             prioritybutton.classList.remove('taskprioritybuttonoff');
             priority = 1;
-        } else if (prioritybutton.classList === 'taskprioritybuttonon') {
+        } else if (prioritybutton.classList == 'taskprioritybuttonon') {
+            prioritybutton.innerText = 'Low';
             prioritybutton.classList.add('taskprioritybuttonoff');
             prioritybutton.classList.remove('taskprioritybuttonon');
             priority = 2;
         };
-    return priority;
     });
 };
 
 function checkedToggle() {
     const checkedbutton = document.querySelector('.taskcheckedbuttonoff');
-    checkedbutton.addEventListener('click', () => {
+    checkedbutton.addEventListener(('click'), () => {
         if (checkedbutton.classList === 'taskcheckedbuttonoff') {
             checkedbutton.classList.add('taskcheckedbuttonon');
             checkedbutton.classList.remove('taskcheckedbuttonoff');
@@ -52,30 +55,30 @@ function checkedToggle() {
             checkedbutton.classList.remove('taskcheckedbuttonon');
             checked = false;
         };
-    return checked;
     });
-
 };
 
 function inputNewProject() {
     const addprojectbutton = document.querySelector('.addprojbutton');
-    const projecttitleinput = document.querySelector('.projecttitleinput').value;
 
-    addprojectbutton.addEventListener('click', () => {
+    addprojectbutton.addEventListener(('click'), () => {
+        const projecttitleinput = document.querySelector('.projecttitleinput').value;
         const inputproject = Project(projecttitleinput);
         projectlist.push(inputproject);
+        addTask();
+        inputNewTask();
     });
 };
 
 function inputNewTask() {
     const addtaskbutton = document.querySelector('.addtaskbutton');
-    const taskttitleinput = document.querySelector('.tasktitleinput').value;
-    const taskdescriptioneinput = document.querySelector('.taskdescriptioninput').value;
-    const taskresponsibleinput = document.querySelector('.taskresponsibleinput').value;
-    const taskdatedueeinput = document.querySelector('.taskdatedueinput').value;
-    const taskdategiveninput = document.querySelector('.taskdategiveninput').value;
 
-    addtaskbutton.addEventListener('click', () => {
+    addtaskbutton.addEventListener(('click'), () => {
+        const taskttitleinput = document.querySelector('.tasktitleinput').value;
+        const taskdescriptioneinput = document.querySelector('.taskdescriptioninput').value;
+        const taskresponsibleinput = document.querySelector('.taskresponsibleinput').value;
+        const taskdatedueeinput = document.querySelector('.taskdatedueinput').value;
+        const taskdategiveninput = document.querySelector('.taskdategiveninput').value;
         const inputtask = Task(taskttitleinput, taskdescriptioneinput, taskresponsibleinput, priority, taskdategiveninput, taskdatedueeinput, checked);
         tasklist.push(inputtask);
     });

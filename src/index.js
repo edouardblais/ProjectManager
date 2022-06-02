@@ -1,9 +1,6 @@
-import { inputNewProject, inputNewTask } from './logic.js';
-import { sidebar } from './dom.js';
+import { inputNewProject } from './logic.js';
+import { addProject } from './dom.js';
 
-sidebar();
+addProject();
 inputNewProject();
-inputNewTask();
-
-
 

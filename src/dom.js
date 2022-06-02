@@ -1,22 +1,11 @@
 import { priorityToggle, checkedToggle } from './logic.js';
 
-function sidebar() {
-    const sidebar = document.getElementById('sidebar');
-
-    const addNewProjectButton = document.createElement('button')
-    addNewProjectButton.innerText = 'Add New Project';
-    addNewProjectButton.classList.add('addnewproject');
-
-    sidebar.appendChild(addNewProjectButton);
-
-    addNewProjectButton.addEventListener('click', addProject());
-};
-
 function addProject() {
     const sidebar = document.getElementById('sidebar');
 
     const projecttitle = document.createElement('input')
     projecttitle.classList.add('projecttitleinput');
+    projecttitle.placeholder = 'Project Title';
 
     const addprojectbutton = document.createElement('button');
     addprojectbutton.innerText = 'Add Project';
@@ -24,56 +13,73 @@ function addProject() {
 
     sidebar.appendChild(projecttitle);
     sidebar.appendChild(addprojectbutton);
-
-    addTask();
-
-}
+};
 
 function addTask() {
     const maincontent = document.getElementById('maincontent');
     const addtaskbox = document.createElement('div');
 
-    const tasktitle = document.createElement('input');
-    tasktitle.classList.add('tasktitleinput');
+    const tasktitle = document.createElement('div');
+    tasktitle.innerText = 'Task Title:'
+    const tasktitleinput = document.createElement('input');
+    tasktitleinput.classList.add('tasktitleinput');
 
-    const taskdescription = document.createElement('input');
-    taskdescription.classList.add('taskdescriptioninput');
+    const taskdescription = document.createElement('div');
+    taskdescription.innerText = 'Description:';
+    const taskdescriptioninput = document.createElement('input');
+    taskdescriptioninput.classList.add('taskdescriptioninput');
 
-    const taskresponsible = document.createElement('input');
-    taskresponsible.classList.add('taskresponsibleinput');
+    const taskresponsible = document.createElement('div');
+    taskresponsible.innerText = 'Assigned Person:';
+    const taskresponsibleinput = document.createElement('input');
+    taskresponsibleinput.classList.add('taskresponsibleinput');
 
-    const taskpriority = document.createElement('button');
-    taskpriority.classList.add('taskprioritybuttonoff');
-    taskpriority.innerText = 'Urgent';
-    priorityToggle();
+    const taskpriority = document.createElement('div');
+    taskpriority.innerText = 'Priority:';
+    const taskpriorityinput = document.createElement('button');
+    taskpriorityinput.id = 'taskprioritybutton'
+    taskpriorityinput.innerText = 'Low';
+    taskpriorityinput.classList.add('taskprioritybuttonoff');
 
-    const taskdategiven = document.createElement('input');
-    taskdategiven.type = 'date';
-    taskdategiven.classList.add('taskdategiveninput');
+    const taskdategiven = document.createElement('div');
+    taskdategiven.innerText = 'Task given on:';
+    const taskdategiveninput = document.createElement('input');
+    taskdategiveninput.setAttribute('type', 'date');
+    taskdategiveninput.classList.add('taskdategiveninput');
 
-    const taskdatedue = document.createElement('input');
-    taskdatedue.type = 'date';
+    const taskdatedue = document.createElement('div');
+    taskdatedue.innerText = 'Task due on:';
+    const taskdatedueinput = document.createElement('input');
+    taskdatedueinput.setAttribute('type', 'date');
     taskdatedue.classList.add('taskdatedueinput');
 
     const taskchecked = document.createElement('button');
     taskchecked.classList.add('taskcheckedbuttonoff');
     //taskchecked.innerHTML = link check image here
-    checkedToggle();
 
-    const addtasktbutton = document.createElement('button');
+    const addtaskbutton = document.createElement('button');
     addtaskbutton.classList.add('addtaskbutton');
-    addtasktbutton.innerText = 'Add New Task';
+    addtaskbutton.innerText = 'Add New Task';
 
     addtaskbox.appendChild(tasktitle);
+    addtaskbox.appendChild(tasktitleinput);
     addtaskbox.appendChild(taskdescription);
+    addtaskbox.appendChild(taskdescriptioninput);
     addtaskbox.appendChild(taskresponsible);
+    addtaskbox.appendChild(taskresponsibleinput);
     addtaskbox.appendChild(taskpriority);
+    addtaskbox.appendChild(taskpriorityinput);
     addtaskbox.appendChild(taskdategiven);
+    addtaskbox.appendChild(taskdategiveninput);
     addtaskbox.appendChild(taskdatedue);
+    addtaskbox.appendChild(taskdatedueinput);
     addtaskbox.appendChild(taskchecked);
-    addtaskbox.appendChild(addtasktbutton);
+    addtaskbox.appendChild(addtaskbutton);
 
     maincontent.appendChild(addtaskbox);
+
+    priorityToggle();
+    checkedToggle();
 };
 
-export { sidebar, addProject, addTask };
+export { addProject, addTask };
