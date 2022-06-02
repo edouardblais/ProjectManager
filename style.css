@@ -1,5 +1,32 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+#content {
+    display: flex;
+    flex-direction: row;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 30vw;
+    height: 100vh;
+}
+
+#maincontent {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 70vw;
+    height: 100vh;
+}
+
 .taskprioritybuttonoff {
-    background-color: blue;
+    background-color: pink;
 }
 
 .taskprioritybuttonon {
