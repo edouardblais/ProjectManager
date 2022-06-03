@@ -1,10 +1,10 @@
 
 
-function addProject() {
-    const sidebar = document.getElementById('sidebar');
-    const projectbox = document.createElement('projectbox');
+function addProjectBox() {
+    const allprojects = document.getElementById('allprojects');
+    const projectbox = document.createElement('div');
 
-    const projecttitle = document.createElement('input')
+    const projecttitle = document.createElement('input');
     projecttitle.classList.add('projecttitleinput');
     projecttitle.placeholder = 'Project Title';
 
@@ -14,16 +14,17 @@ function addProject() {
 
     projectbox.appendChild(projecttitle);
     projectbox.appendChild(addprojectbutton);
-    sidebar.appendChild(projectbox);
+    allprojects.appendChild(projectbox);
 };
 
 function appendProjectToSidebar() {
     const getprojecttitle = document.querySelector('.projecttitleinput').value;
+    const allprojects = document.getElementById('allprojects');
     const divforprojectinput = document.createElement('div');
     divforprojectinput.id = getprojecttitle;
     divforprojectinput.classList.add('listedprojects');
     divforprojectinput.innerText = getprojecttitle;
-    sidebar.appendChild(divforprojectinput);
+    allprojects.appendChild(divforprojectinput);
 };
 
 function addTask() {
@@ -126,4 +127,56 @@ function appendTask() {
     maincontent.appendChild(listedtasks);
 };
 
-export { addProject, addTask, appendProjectToSidebar, appendTask };
+function showTasks(title, description, responsible, priority, duedate) {
+    const maincontent = document.getElementById('maincontent');
+    const listedtasks = document.createElement('div');
+    listedtasks.classList.add('listedtasks');
+
+    let taskchecked = document.createElement('img');
+    taskchecked.classList.add('taskchecked');
+    taskchecked.src = 'icons/circle.svg';
+    taskchecked.classList.add('circle');
+
+    const divfortasktitleinput = document.createElement('div');
+    divfortasktitleinput.innerText = title;
+
+    const divfortaskdescriptioninput = document.createElement('div');
+    divfortaskdescriptioninput.innerText = description;
+
+    const divfortaskresponsibleinput = document.createElement('div');
+    divfortaskresponsibleinput.innerText = responsible;
+
+    let btnfortaskpriority = document.createElement('button');
+    if (priority == 'low') {
+        btnfortaskpriority.classList.add('taskpriority');
+        btnfortaskpriority.innerText = 'Low';
+        btnfortaskpriority.classList.add('prioritylow');
+    } else if (priority == 'high') {
+        btnfortaskpriority.classList.add('taskpriority');
+        btnfortaskpriority.innerText = 'High';
+        btnfortaskpriority.classList.add('priorityhigh'); 
+    };
+
+    const divfortaskdatedueinput = document.createElement('div');
+    divfortaskdatedueinput.innerText = duedate;
+
+    listedtasks.appendChild(taskchecked);
+    listedtasks.appendChild(divfortasktitleinput);
+    listedtasks.appendChild(divfortaskdescriptioninput);
+    listedtasks.appendChild(divfortaskresponsibleinput);
+    listedtasks.appendChild(btnfortaskpriority);
+    listedtasks.appendChild(divfortaskdatedueinput);
+
+    maincontent.appendChild(listedtasks);
+}
+
+function showProjects(title) {
+    const allprojects = document.getElementById('allprojects');
+    const listedproject = document.createElement('div');
+    listedproject.classList.add('listedprojects');
+    listedproject.id = title;
+    listedproject.innerText = title;
+    allprojects.appendChild(listedproject);
+};
+
+export { addProjectBox, addTask, appendProjectToSidebar, appendTask, showTasks, showProjects };

@@ -1,4 +1,4 @@
-import { addTask, appendProjectToSidebar, appendTask } from "./dom.js";
+import { addTask, appendProjectToSidebar, appendTask, showTasks, showProjects } from "./dom.js";
 
 const logic = () => {
     let projectlist = [];
@@ -66,9 +66,25 @@ const logic = () => {
             const projecttitleinput = document.querySelector('.projecttitleinput').value;
             const inputproject = Project(projecttitleinput);
             projectlist.push(inputproject);
+            localStorage.setItem('projects', JSON.stringify(projectlist));
             appendProjectToSidebar();
-            addTaskToProject();
         });
+    };
+
+    function displayProjects() {
+        getProjectsFromStorage();
+        projectlist.forEach((project) => {
+            showProjects(project.getTitle);
+        });
+    }
+
+    function getProjectsFromStorage() {
+        if (localStorage.getItem('projects') === null) {
+            projectlist = [];
+        } else {
+            let storedprojects = JSON.parse(localStorage.getItem('projects'));
+            projectlist = storedprojects;
+        };
     };
 
     function addTaskToProject() {
@@ -76,13 +92,21 @@ const logic = () => {
 
         document.addEventListener('click', (event) => {
             if (event.target.classList.contains('listedprojects')) {
-            maincontent.innerHTML = '';
-            addTask();
-            getTasksFromStorage();
-            displayTasksFromStorage(event.target.id);
-            inputNewTask();
+                maincontent.innerHTML = '';
+                addTask();
+                getTasksFromStorage();
+                displayTasksForChosenProject(event.target.id);
+                inputNewTask();
+            } else if (event.target.id === 'important') {
+                maincontent.innerHTML = '';
+                getTasksFromStorage();
+                displayImportantTasks();
+            } else if (event.target.id === 'alltasks') {
+                maincontent.innerHTML = '';
+                getTasksFromStorage();
+                displayAllTasks();
             }
-        })
+        });
     }
 
     function getTasksFromStorage() {
@@ -92,53 +116,29 @@ const logic = () => {
             let storedtasks = JSON.parse(localStorage.getItem('tasks'));
             tasklist = storedtasks;
         };
-    }
+    };
 
-    function displayTasksFromStorage(id) {
-        for (let i=0; i<tasklist.length; i++) {
-            if (tasklist[i].getAssociatedproject == id) {
-                const maincontent = document.getElementById('maincontent');
-                const listedtasks = document.createElement('div');
-                listedtasks.classList.add('listedtasks');
-            
-                let taskchecked = document.createElement('img');
-                taskchecked.classList.add('taskchecked');
-                taskchecked.src = 'icons/circle.svg';
-                taskchecked.classList.add('circle');
-            
-                const divfortasktitleinput = document.createElement('div');
-                divfortasktitleinput.innerText = tasklist[i].getTitle;
-            
-                const divfortaskdescriptioninput = document.createElement('div');
-                divfortaskdescriptioninput.innerText = tasklist[i].getDescription;
-            
-                const divfortaskresponsibleinput = document.createElement('div');
-                divfortaskresponsibleinput.innerText = tasklist[i].getResponsible;
-            
-                let btnfortaskpriority = document.createElement('button');
-                if (tasklist[i].getPriority == 'low') {
-                    btnfortaskpriority.classList.add('taskpriority');
-                    btnfortaskpriority.innerText = 'Low';
-                    btnfortaskpriority.classList.add('prioritylow');
-                } else if (tasklist[i].getPriority == 'high') {
-                    btnfortaskpriority.classList.add('taskpriority');
-                    btnfortaskpriority.innerText = 'High';
-                    btnfortaskpriority.classList.add('priorityhigh'); 
-                };
-            
-                const divfortaskdatedueinput = document.createElement('div');
-                divfortaskdatedueinput.innerText = tasklist[i].getDuedate;
-            
-                listedtasks.appendChild(taskchecked);
-                listedtasks.appendChild(divfortasktitleinput);
-                listedtasks.appendChild(divfortaskdescriptioninput);
-                listedtasks.appendChild(divfortaskresponsibleinput);
-                listedtasks.appendChild(btnfortaskpriority);
-                listedtasks.appendChild(divfortaskdatedueinput);
-            
-                maincontent.appendChild(listedtasks);
+    function displayTasksForChosenProject(id) {
+        tasklist.forEach((task) => {
+            if (task.getAssociatedproject == id) {
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
             };
-        };
+        });
+    };
+
+    function displayImportantTasks() {
+        tasklist.forEach((task) => {
+            if (task.getPriority == 'high') {
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+            };
+        });
+    };
+
+    function displayAllTasks() {
+        tasklist.forEach((task) => {
+            showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+            
+        });
     };
 
     function inputNewTask() {
@@ -160,6 +160,8 @@ const logic = () => {
     inputNewProject();
     priorityToggle();
     checkedToggle();
+    displayProjects();
+    addTaskToProject();
 
 };
 

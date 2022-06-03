@@ -1,6 +1,6 @@
 import { logic } from './logic.js';
-import { addProject } from './dom.js';
+import { addProjectBox } from './dom.js';
 
-addProject();
+addProjectBox();
 logic();
 
