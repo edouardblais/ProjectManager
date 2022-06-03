@@ -17,9 +17,10 @@ function addProject() {
     sidebar.appendChild(projectbox);
 };
 
-function appendProject() {
+function appendProjectToSidebar() {
     const getprojecttitle = document.querySelector('.projecttitleinput').value;
     const divforprojectinput = document.createElement('div');
+    divforprojectinput.id = getprojecttitle;
     divforprojectinput.classList.add('listedprojects');
     divforprojectinput.innerText = getprojecttitle;
     sidebar.appendChild(divforprojectinput);
@@ -125,4 +126,4 @@ function appendTask() {
     maincontent.appendChild(listedtasks);
 };
 
-export { addProject, addTask, appendProject, appendTask };
+export { addProject, addTask, appendProjectToSidebar, appendTask };
