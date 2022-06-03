@@ -4,9 +4,38 @@
     margin: 0;
 }
 
+:root {
+    --green: #84cc16;
+    --marine: #0c4a6e;
+}
+
 #content {
     display: flex;
+    flex-direction: column;
+    width:100vw;
+    height: 100vh;
+}
+
+#header {
+    border-bottom: #84cc16 solid 2px;
+    height: 10vh;
+}
+
+#footer {
+    border-top:#84cc16 solid 2px;
+    height: 5vh;
+}
+
+#header, #footer {
+    width: 100vw;
+    text-align: center;
+}
+
+#thebusiness {
+    display: flex;
     flex-direction: row;
+    width: 100vw;
+    height: 85vh;
 }
 
 #sidebar {
@@ -14,7 +43,37 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 20vw;
-    height: 100vh;
+    gap: 2vh;
+    padding:1vw;
+}
+
+#logo {
+    color: var(--marine);
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+#logoicon {
+    filter: invert(62%) sepia(78%) saturate(488%) hue-rotate(40deg) brightness(99%) contrast(89%);
+    height: 3rem;
+    width: auto;
+}
+
+#footer {
+    color:var(--marine);
+    font-size: 1.5rem;
+    padding-top: 1vh;
+    font-style: italic;
+}
+
+.green {
+    color:var(--green);
+}
+
+#heart {
+    filter: invert(62%) sepia(78%) saturate(488%) hue-rotate(40deg) brightness(99%) contrast(89%);
+    height: 1.5rem;
+    width: auto;
 }
 
 #maincontent {
@@ -22,7 +81,6 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 80vw;
-    height: 100vh;
 }
 
 .projectbox {
