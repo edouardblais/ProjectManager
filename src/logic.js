@@ -1,4 +1,7 @@
 import { addTask, appendProjectToSidebar, appendTask, showTasks, showProjects } from "./dom.js";
+import { addDays, format, isEqual, isWithinInterval, toDate } from "date-fns";
+import parseISO from "date-fns/parseISO";
+import daysToWeeks from "date-fns/daysToWeeks/index";
 
 const logic = () => {
     let projectlist = [];
@@ -87,7 +90,7 @@ const logic = () => {
         };
     };
 
-    function addTaskToProject() {
+    function viewChosenTasks() {
         const maincontent = document.getElementById('maincontent');
 
         document.addEventListener('click', (event) => {
@@ -96,7 +99,7 @@ const logic = () => {
                 addTask();
                 getTasksFromStorage();
                 displayTasksForChosenProject(event.target.id);
-                inputNewTask();
+                inputNewTask(event.target.id);
             } else if (event.target.id === 'important') {
                 maincontent.innerHTML = '';
                 getTasksFromStorage();
@@ -105,7 +108,15 @@ const logic = () => {
                 maincontent.innerHTML = '';
                 getTasksFromStorage();
                 displayAllTasks();
-            }
+            } else if (event.target.id === 'today') {
+                maincontent.innerHTML = '';
+                getTasksFromStorage();
+                displayTasksForToday();
+            } else if (event.target.id === 'thisweek') {
+                maincontent.innerHTML = '';
+                getTasksFromStorage();
+                displayTasksForThisWeek();
+            };
         });
     }
 
@@ -141,15 +152,39 @@ const logic = () => {
         });
     };
 
-    function inputNewTask() {
+    function displayTasksForToday() {
+        let today =  Date.parse(format(new Date(), "yyyy-MM-dd")); 
+        tasklist.forEach((task) => {
+            if (today == Date.parse(task.getDuedate)) {
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+            };
+        });
+    };
+
+    function displayTasksForThisWeek() {
+        tasklist.forEach((task) => {
+            let date = parseISO(task.getDuedate);
+            if (checkIfNextweek(date)) {
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+            };
+        });
+    };
+
+    function checkIfNextweek(taskdate) {
+        let nextweek = addDays(new Date(), 8);
+        let today = new Date();
+        return isWithinInterval(taskdate, { start: today, end: nextweek });
+    };
+
+    function inputNewTask(id) {
         const addtaskbutton = document.querySelector('.addtaskbutton');
+        const associatedprojectinput = id;
     
         addtaskbutton.addEventListener(('click'), () => {
             const taskttitleinput = document.querySelector('.tasktitleinput').value;
             const taskdescriptioneinput = document.querySelector('.taskdescriptioninput').value;
             const taskresponsibleinput = document.querySelector('.taskresponsibleinput').value;
             const taskdatedueeinput = document.querySelector('.taskdatedueinput').value;
-            const associatedprojectinput = document.querySelector('.projecttitleinput').value;
             const inputtask = Task(taskttitleinput, taskdescriptioneinput, taskresponsibleinput, priority, taskdatedueeinput, checked, associatedprojectinput);
             tasklist.push(inputtask);
             appendTask();
@@ -161,7 +196,7 @@ const logic = () => {
     priorityToggle();
     checkedToggle();
     displayProjects();
-    addTaskToProject();
+    viewChosenTasks();
 
 };
 
