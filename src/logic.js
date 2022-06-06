@@ -6,8 +6,6 @@ import daysToWeeks from "date-fns/daysToWeeks/index";
 const logic = () => {
     let projectlist = [];
     let tasklist = [];
-    let priority = 'low';
-    let checked = false;
 
     const Project = (title) => {
     
@@ -16,17 +14,17 @@ const logic = () => {
         return { getTitle };
     };
     
-    const Task = (title, description, responsible, priority, duedate, checked, associatedproject) => {
+    const Task = (title, description, responsible, priority, duedate, associatedproject, notchecked) => {
     
         const getTitle = title;
         const getDescription = description;
         const getResponsible = responsible;
         const getPriority = priority;
         const getDuedate = duedate;
-        const isChecked = checked;
         const getAssociatedproject = associatedproject;
+        let isChecked = notchecked;
     
-        return { getTitle, getDescription, getResponsible, getPriority, getDuedate, isChecked, getAssociatedproject };
+        return { getTitle, getDescription, getResponsible, getPriority, getDuedate, getAssociatedproject, isChecked };
     
     };
 
@@ -36,12 +34,10 @@ const logic = () => {
                 event.target.innerText = 'High';
                 event.target.classList.add('priorityhigh');
                 event.target.classList.remove('prioritylow');
-                priority = 'high';
             } else if (event.target.classList.contains('priorityhigh')) {
                 event.target.innerText = 'Low';
                 event.target.classList.add('prioritylow');
                 event.target.classList.remove('priorityhigh');
-                priority = 'low';
             };
         });
     };
@@ -52,12 +48,20 @@ const logic = () => {
                 event.target.src = 'icons/check.svg'
                 event.target.classList.add('check');
                 event.target.classList.remove('circle');
-                checked = true;
+                tasklist.forEach((task) => {
+                    if (event.target.id === task.getTitle) {
+                        task.isChecked = true;
+                    };
+                });
             } else if (event.target.classList.contains('check')) {
                 event.target.classList.add('circle');
                 event.target.classList.remove('check');
                 event.target.src = 'icons/circle.svg'
-                checked = false;
+                tasklist.forEach((task) => {
+                    if (event.target.id === task.getTitle) {
+                        task.isChecked = false;
+                    };
+                });
             };
         });
     };
@@ -132,23 +136,22 @@ const logic = () => {
     function displayTasksForChosenProject(id) {
         tasklist.forEach((task) => {
             if (task.getAssociatedproject == id) {
-                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate, task.isChecked);
             };
         });
     };
 
     function displayImportantTasks() {
         tasklist.forEach((task) => {
-            if (task.getPriority == 'high') {
-                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+            if (task.getPriority == 'High') {
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate, task.isChecked);
             };
         });
     };
 
     function displayAllTasks() {
         tasklist.forEach((task) => {
-            showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
-            
+            showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate, task.isChecked);
         });
     };
 
@@ -156,7 +159,7 @@ const logic = () => {
         let today =  Date.parse(format(new Date(), "yyyy-MM-dd")); 
         tasklist.forEach((task) => {
             if (today == Date.parse(task.getDuedate)) {
-                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate, task.isChecked);
             };
         });
     };
@@ -165,7 +168,7 @@ const logic = () => {
         tasklist.forEach((task) => {
             let date = parseISO(task.getDuedate);
             if (checkIfNextweek(date)) {
-                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate);
+                showTasks(task.getTitle, task.getDescription, task.getResponsible, task.getPriority, task.getDuedate, task.isChecked);
             };
         });
     };
@@ -185,7 +188,8 @@ const logic = () => {
             const taskdescriptioneinput = document.querySelector('.taskdescriptioninput').value;
             const taskresponsibleinput = document.querySelector('.taskresponsibleinput').value;
             const taskdatedueeinput = document.querySelector('.taskdatedueinput').value;
-            const inputtask = Task(taskttitleinput, taskdescriptioneinput, taskresponsibleinput, priority, taskdatedueeinput, checked, associatedprojectinput);
+            const taskpriority = document.querySelector('.taskpriority').innerText;
+            const inputtask = Task(taskttitleinput, taskdescriptioneinput, taskresponsibleinput, taskpriority, taskdatedueeinput, associatedprojectinput, false);
             tasklist.push(inputtask);
             appendTask();
             localStorage.setItem('tasks', JSON.stringify(tasklist));
