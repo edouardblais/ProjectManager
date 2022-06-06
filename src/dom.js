@@ -103,6 +103,7 @@ function appendTask() {
 
     const gettaskpriority = document.querySelector('.taskpriority');
     let btnfortaskpriority = document.createElement('button');
+    btnfortaskpriority.id = gettasktitle;
     if (gettaskpriority.classList.contains('prioritylow')) {
         btnfortaskpriority.classList.add('taskpriority');
         btnfortaskpriority.innerText = 'Low';
@@ -138,7 +139,7 @@ function showTasks(title, description, responsible, priority, duedate, checked) 
         taskchecked.classList.add('circle');
         taskchecked.id = title;
     } else if (checked === true) {
-        taskchecked.src = 'icons/checked.svg';
+        taskchecked.src = 'icons/check.svg';
         taskchecked.classList.add('check');
         taskchecked.id = title;
     };
@@ -153,6 +154,7 @@ function showTasks(title, description, responsible, priority, duedate, checked) 
     divfortaskresponsibleinput.innerText = responsible;
 
     let btnfortaskpriority = document.createElement('button');
+    btnfortaskpriority.id = title;
     if (priority == 'Low') {
         btnfortaskpriority.classList.add('taskpriority');
         btnfortaskpriority.innerText = 'Low';

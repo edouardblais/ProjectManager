@@ -34,10 +34,22 @@ const logic = () => {
                 event.target.innerText = 'High';
                 event.target.classList.add('priorityhigh');
                 event.target.classList.remove('prioritylow');
+                tasklist.forEach((task) => {
+                    if (event.target.id === task.getTitle) {
+                        task.getPriority = 'High';
+                        localStorage.setItem('tasks', JSON.stringify(tasklist));
+                    };
+                });
             } else if (event.target.classList.contains('priorityhigh')) {
                 event.target.innerText = 'Low';
                 event.target.classList.add('prioritylow');
                 event.target.classList.remove('priorityhigh');
+                tasklist.forEach((task) => {
+                    if (event.target.id === task.getTitle) {
+                        task.getPriority = 'Low';
+                        localStorage.setItem('tasks', JSON.stringify(tasklist));
+                    };
+                });
             };
         });
     };
@@ -51,6 +63,7 @@ const logic = () => {
                 tasklist.forEach((task) => {
                     if (event.target.id === task.getTitle) {
                         task.isChecked = true;
+                        localStorage.setItem('tasks', JSON.stringify(tasklist));
                     };
                 });
             } else if (event.target.classList.contains('check')) {
@@ -60,6 +73,7 @@ const logic = () => {
                 tasklist.forEach((task) => {
                     if (event.target.id === task.getTitle) {
                         task.isChecked = false;
+                        localStorage.setItem('tasks', JSON.stringify(tasklist));
                     };
                 });
             };
