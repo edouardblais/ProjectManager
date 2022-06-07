@@ -1,7 +1,6 @@
-import { addTask, appendProjectToSidebar, appendTask, showTasks, showProjects } from "./dom.js";
-import { addDays, format, isEqual, isWithinInterval, toDate } from "date-fns";
+import { addTask, showTasks, showProjects, appendTaskToShownTasks, addDeleteProjectOption } from "./dom.js";
+import { addDays, format, isWithinInterval } from "date-fns";
 import parseISO from "date-fns/parseISO";
-import daysToWeeks from "date-fns/daysToWeeks/index";
 
 const logic = () => {
     let projectlist = [];
@@ -88,11 +87,13 @@ const logic = () => {
             const inputproject = Project(projecttitleinput);
             projectlist.push(inputproject);
             localStorage.setItem('projects', JSON.stringify(projectlist));
-            appendProjectToSidebar();
+            displayProjects();
         });
     };
 
     function displayProjects() {
+        const listedprojects = document.getElementById('listedprojects');
+        listedprojects.innerHTML='';
         getProjectsFromStorage();
         projectlist.forEach((project) => {
             showProjects(project.getTitle);
@@ -118,6 +119,7 @@ const logic = () => {
                 getTasksFromStorage();
                 displayTasksForChosenProject(event.target.id);
                 inputNewTask(event.target.id);
+                addDeleteProjectOption(event.target.id);
             } else if (event.target.id === 'important') {
                 maincontent.innerHTML = '';
                 getTasksFromStorage();
@@ -197,7 +199,7 @@ const logic = () => {
         const addtaskbutton = document.querySelector('.addtaskbutton');
         const associatedprojectinput = id;
     
-        addtaskbutton.addEventListener(('click'), () => {
+        addtaskbutton.addEventListener('click', () => {
             const taskttitleinput = document.querySelector('.tasktitleinput').value;
             const taskdescriptioneinput = document.querySelector('.taskdescriptioninput').value;
             const taskresponsibleinput = document.querySelector('.taskresponsibleinput').value;
@@ -205,8 +207,46 @@ const logic = () => {
             const taskpriority = document.querySelector('.taskpriority').innerText;
             const inputtask = Task(taskttitleinput, taskdescriptioneinput, taskresponsibleinput, taskpriority, taskdatedueeinput, associatedprojectinput, false);
             tasklist.push(inputtask);
-            appendTask();
+            appendTaskToShownTasks();
             localStorage.setItem('tasks', JSON.stringify(tasklist));
+        });
+    };
+
+    function deleteTask() {
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('deletebutton')) {
+                tasklist.forEach((task) => {
+                    if (event.target.id === task.getTitle) {
+                        const index = tasklist.indexOf(task);
+                        tasklist.splice(index, 1);
+                        localStorage.setItem('tasks', JSON.stringify(tasklist));
+                        event.target.parentNode.style.display = 'none';
+                    };
+                });
+            };
+        });
+    };
+
+    function deleteproject() {
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('deleteproject')) {
+                projectlist.forEach((project) => {
+                    if (event.target.id === project.getTitle) {
+                        const index = projectlist.indexOf(project);
+                        projectlist.splice(index, 1);
+                        localStorage.setItem('projects', JSON.stringify(projectlist));
+                        event.target.parentNode.style.display = 'none';
+                    };
+                });
+                tasklist.forEach((task) => {
+                    if (event.target.id === task.getAssociatedproject) {
+                        const index = tasklist.indexOf(task);
+                        tasklist.splice(index, 1);
+                        localStorage.setItem('tasks', JSON.stringify(tasklist));
+                        event.target.parentNode.style.display = 'none';
+                    };
+                });     
+            };
         });
     };
 
@@ -215,6 +255,8 @@ const logic = () => {
     checkedToggle();
     displayProjects();
     viewChosenTasks();
+    deleteTask();
+    deleteproject();
 
 };
 

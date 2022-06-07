@@ -1,7 +1,7 @@
 
 
 function addProjectBox() {
-    const allprojects = document.getElementById('allprojects');
+    const projects = document.getElementById('projectbox');
     const projectbox = document.createElement('div');
 
     const projecttitle = document.createElement('input');
@@ -14,17 +14,7 @@ function addProjectBox() {
 
     projectbox.appendChild(projecttitle);
     projectbox.appendChild(addprojectbutton);
-    allprojects.appendChild(projectbox);
-};
-
-function appendProjectToSidebar() {
-    const getprojecttitle = document.querySelector('.projecttitleinput').value;
-    const allprojects = document.getElementById('allprojects');
-    const divforprojectinput = document.createElement('div');
-    divforprojectinput.id = getprojecttitle;
-    divforprojectinput.classList.add('listedprojects');
-    divforprojectinput.innerText = getprojecttitle;
-    allprojects.appendChild(divforprojectinput);
+    projects.appendChild(projectbox);
 };
 
 function addTask() {
@@ -79,7 +69,7 @@ function addTask() {
     maincontent.appendChild(addtaskbox);
 };
 
-function appendTask() {
+function appendTaskToShownTasks() {
     const maincontent = document.getElementById('maincontent');
     const listedtasks = document.createElement('div');
     listedtasks.classList.add('listedtasks');
@@ -118,12 +108,18 @@ function appendTask() {
     const divfortaskdatedueinput = document.createElement('div');
     divfortaskdatedueinput.innerText = gettaskdatedue;
 
+    const deletebutton = document.createElement('img');
+    deletebutton.classList.add('deletebutton');
+    deletebutton.src = 'icons/delete.svg';
+    deletebutton.id = gettasktitle;
+
     listedtasks.appendChild(taskchecked);
     listedtasks.appendChild(divfortasktitleinput);
     listedtasks.appendChild(divfortaskdescriptioninput);
     listedtasks.appendChild(divfortaskresponsibleinput);
     listedtasks.appendChild(btnfortaskpriority);
     listedtasks.appendChild(divfortaskdatedueinput);
+    listedtasks.appendChild(deletebutton);
 
     maincontent.appendChild(listedtasks);
 };
@@ -168,23 +164,40 @@ function showTasks(title, description, responsible, priority, duedate, checked) 
     const divfortaskdatedueinput = document.createElement('div');
     divfortaskdatedueinput.innerText = duedate;
 
+    const deletebutton = document.createElement('img');
+    deletebutton.classList.add('deletebutton');
+    deletebutton.src = 'icons/delete.svg';
+    deletebutton.id = title;
+
     listedtasks.appendChild(taskchecked);
     listedtasks.appendChild(divfortasktitleinput);
     listedtasks.appendChild(divfortaskdescriptioninput);
     listedtasks.appendChild(divfortaskresponsibleinput);
     listedtasks.appendChild(btnfortaskpriority);
     listedtasks.appendChild(divfortaskdatedueinput);
+    listedtasks.appendChild(deletebutton);
 
     maincontent.appendChild(listedtasks);
 }
 
 function showProjects(title) {
-    const allprojects = document.getElementById('allprojects');
+    const allprojects = document.getElementById('listedprojects');
+
     const listedproject = document.createElement('div');
     listedproject.classList.add('listedprojects');
     listedproject.id = title;
     listedproject.innerText = title;
+
     allprojects.appendChild(listedproject);
 };
 
-export { addProjectBox, addTask, appendProjectToSidebar, appendTask, showTasks, showProjects };
+function addDeleteProjectOption(title) {
+    const chosenproject = document.getElementById(title);
+    const deleteproject = document.createElement('img');
+    deleteproject.src = 'icons/delete.svg';
+    deleteproject.id = title;
+    deleteproject.classList.add('deleteproject');
+    chosenproject.appendChild(deleteproject);
+}
+
+export { addProjectBox, addTask, addDeleteProjectOption, appendTaskToShownTasks, showTasks, showProjects };
