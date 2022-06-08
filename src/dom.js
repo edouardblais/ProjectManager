@@ -5,8 +5,8 @@ function addProjectBox() {
     const projectbox = document.createElement('div');
 
     const projecttitle = document.createElement('input');
-    projecttitle.classList.add('projecttitleinput');
     projecttitle.placeholder = 'Project Title';
+    projecttitle.id = 'projecttitleinput';
 
     const addprojectbutton = document.createElement('button');
     addprojectbutton.innerText = 'Add Project';
@@ -193,11 +193,19 @@ function showProjects(title) {
 
 function addDeleteProjectOption(title) {
     const chosenproject = document.getElementById(title);
-    const deleteproject = document.createElement('img');
-    deleteproject.src = 'icons/delete.svg';
-    deleteproject.id = title;
-    deleteproject.classList.add('deleteproject');
-    chosenproject.appendChild(deleteproject);
+    if (!chosenproject.classList.contains('deleteoptionactivated')) {
+        const deleteproject = document.createElement('img');
+        deleteproject.src = 'icons/delete.svg';
+        deleteproject.id = title;
+        deleteproject.classList.add('deleteproject');
+        chosenproject.appendChild(deleteproject);
+        chosenproject.classList.add('deleteoptionactivated');
+    };
+};
+
+function clearMainContent() {
+    const maincontent = document.getElementById('maincontent');
+    maincontent.innerHTML = '';
 }
 
-export { addProjectBox, addTask, addDeleteProjectOption, appendTaskToShownTasks, showTasks, showProjects };
+export { addProjectBox, addTask, addDeleteProjectOption, appendTaskToShownTasks, showTasks, showProjects, clearMainContent };
