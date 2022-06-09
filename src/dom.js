@@ -3,9 +3,10 @@
 function addProjectBox() {
     const projects = document.getElementById('projectbox');
     const projectbox = document.createElement('div');
+    projectbox.classList.add('projectbox');
 
     const projecttitle = document.createElement('input');
-    projecttitle.placeholder = 'Project Title';
+    projecttitle.placeholder = 'Give me a fresh and unique name!';
     projecttitle.id = 'projecttitleinput';
 
     const addprojectbutton = document.createElement('button');
@@ -22,20 +23,20 @@ function addTaskBox() {
     const addtaskbox = document.createElement('div');
     addtaskbox.classList.add('taskbox');
 
+    const taskTitleResponsiblePriorityDatebox = document.createElement('div');
+    taskTitleResponsiblePriorityDatebox.classList.add('tasktitleresponsibleprioritydatebox');
+    
     const tasktitle = document.createElement('div');
     tasktitle.innerText = 'Task Title:'
     let tasktitleinput = document.createElement('input');
     tasktitleinput.classList.add('tasktitleinput');
-
-    const taskdescription = document.createElement('div');
-    taskdescription.innerText = 'Description:';
-    let taskdescriptioninput = document.createElement('input');
-    taskdescriptioninput.classList.add('taskdescriptioninput');
+    tasktitleinput.placeholder = 'Give me a fresh and unique name!'
 
     const taskresponsible = document.createElement('div');
     taskresponsible.innerText = 'Assigned Person:';
     let taskresponsibleinput = document.createElement('input');
     taskresponsibleinput.classList.add('taskresponsibleinput');
+    taskresponsibleinput.placeholder = "Whooo's going to do it?";
 
     const taskpriority = document.createElement('div');
     taskpriority.innerText = 'Priority:';
@@ -50,21 +51,35 @@ function addTaskBox() {
     taskdatedueinput.setAttribute('type', 'date');
     taskdatedueinput.classList.add('taskdatedueinput');
 
+    const taskdescriptionbox = document.createElement('div');
+    taskdescriptionbox.classList.add('taskdescriptionbox');
+    const taskdescription = document.createElement('div');
+    taskdescription.innerText = 'Details:';
+    let taskdescriptioninput = document.createElement('input');
+    taskdescriptioninput.classList.add('taskdescriptioninput');
+    taskdescriptioninput.placeholder = "Give me the deets!"
+
+    const addtaskbuttonbox = document.createElement('div');
+    addtaskbuttonbox.classList.add('addtaskbuttonbox');
     const addtaskbutton = document.createElement('button');
     addtaskbutton.classList.add('addtaskbutton');
-    addtaskbutton.innerText = 'Add New Task';
+    addtaskbutton.innerText = 'Add Task';
 
-    addtaskbox.appendChild(tasktitle);
-    addtaskbox.appendChild(tasktitleinput);
-    addtaskbox.appendChild(taskdescription);
-    addtaskbox.appendChild(taskdescriptioninput);
-    addtaskbox.appendChild(taskresponsible);
-    addtaskbox.appendChild(taskresponsibleinput);
-    addtaskbox.appendChild(taskpriority);
-    addtaskbox.appendChild(taskpriorityinput);
-    addtaskbox.appendChild(taskdatedue);
-    addtaskbox.appendChild(taskdatedueinput);
-    addtaskbox.appendChild(addtaskbutton);
+    
+    taskTitleResponsiblePriorityDatebox.appendChild(tasktitle);
+    taskTitleResponsiblePriorityDatebox.appendChild(tasktitleinput);
+    taskTitleResponsiblePriorityDatebox.appendChild(taskresponsible);
+    taskTitleResponsiblePriorityDatebox.appendChild(taskresponsibleinput);
+    taskTitleResponsiblePriorityDatebox.appendChild(taskpriority);
+    taskTitleResponsiblePriorityDatebox.appendChild(taskpriorityinput);
+    taskTitleResponsiblePriorityDatebox.appendChild(taskdatedue);
+    taskTitleResponsiblePriorityDatebox.appendChild(taskdatedueinput);
+    taskdescriptionbox.appendChild(taskdescription);
+    taskdescriptionbox.appendChild(taskdescriptioninput);
+    addtaskbox.appendChild(taskTitleResponsiblePriorityDatebox);
+    addtaskbox.appendChild(taskdescriptionbox);
+    addtaskbuttonbox.appendChild(addtaskbutton);
+    addtaskbox.appendChild(addtaskbuttonbox);
 
     maincontent.appendChild(addtaskbox);
 };
