@@ -1,4 +1,4 @@
-import { addTask, showTasks, showProjects, appendTaskToShownTasks, addDeleteProjectOption, clearMainContent } from "./dom.js";
+import { addTaskBox, showTasks, showProjects, appendTaskToShownTasks, addDeleteProjectOption, clearMainContent } from "./dom.js";
 import { addDays, format, isWithinInterval } from "date-fns";
 import parseISO from "date-fns/parseISO";
 
@@ -115,7 +115,7 @@ const logic = () => {
         document.addEventListener('click', (event) => {
             if (event.target.classList.contains('listedprojects')) {
                 clearMainContent();
-                addTask();
+                addTaskBox();
                 getTasksFromStorage();
                 displayTasksForChosenProject(event.target.id);
                 inputNewTask(event.target.id);

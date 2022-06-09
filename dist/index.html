@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Manager</title>
     <link href="style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
     <script src="main.js" defer></script>
@@ -15,14 +18,15 @@
         </div>
         <div id="thebusiness">
             <div id="sidebar">
-                <div>Home</div>
-                    <div id="alltasks">All Tasks</div>
-                    <div id="today">Today</div>
-                    <div id="thisweek">Next 7 Days</div>
-                    <div id="important">High Priority</div>
-                <div id="allprojects">Projects
+                <div class="sidebartitles">Home
+                    <div id="alltasks" class="pushed">All Tasks</div>
+                    <div id="today" class="pushed">Today</div>
+                    <div id="thisweek" class="pushed">Next 7 Days</div>
+                    <div id="important" class="pushed">High Priority</div>
+                </div>
+                <div class="sidebartitles" id="allprojects">Projects
                     <div id="projectbox"></div>
-                    <div id="listedprojects"></div>
+                    <div id="listedprojects" class="pushed"></div>
                 </div>
             </div>
             <div id="maincontent"></div>

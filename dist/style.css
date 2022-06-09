@@ -7,6 +7,10 @@
 :root {
     --green: #84cc16;
     --marine: #0c4a6e;
+    --lightblue: #e0f2fe;
+    --lightgreen:#f0fdf4;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
 }
 
 #content {
@@ -17,18 +21,19 @@
 }
 
 #header {
-    border-bottom: #84cc16 solid 2px;
+    border-bottom: var(--green) solid 2px;
     height: 10vh;
 }
 
 #footer {
-    border-top:#84cc16 solid 2px;
+    border-top: var(--green) solid 2px;
     height: 5vh;
 }
 
 #header, #footer {
     width: 100vw;
     text-align: center;
+    background-color: var(--lightblue);
 }
 
 #thebusiness {
@@ -42,9 +47,24 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 20vw;
+    width: 15vw;
     gap: 2vh;
     padding:1vw;
+    background-color: var(--lightgreen);
+    color: var(--marine);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.pushed {
+    padding-left: 1.5vw;
+    font-size: 1.2rem;
+}
+
+.sidebartitles {
+    gap:1.5vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #logo {
@@ -80,7 +100,13 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 80vw;
+    align-items: center;
+    width: 85vw;
+    gap: 1vh;
+    padding: 1vw;
+    background-color: white;
+    color: black;
+    font-weight: 700;
 }
 
 .projectbox {
@@ -91,12 +117,16 @@
 .taskbox {
     display: flex;
     flex-direction: row;
+    margin:1vh;
 }
 
 .listedtasks {
     display: flex;
     flex-direction: row;
-    gap: 1rem;
+    gap: 1vh;
+    width: 75vw;
+    height:5vh;
+    border: var(--marine) 1px solid;
 }
 
 .prioritylow {

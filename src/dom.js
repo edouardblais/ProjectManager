@@ -17,7 +17,7 @@ function addProjectBox() {
     projects.appendChild(projectbox);
 };
 
-function addTask() {
+function addTaskBox() {
     const maincontent = document.getElementById('maincontent');
     const addtaskbox = document.createElement('div');
     addtaskbox.classList.add('taskbox');
@@ -208,4 +208,4 @@ function clearMainContent() {
     maincontent.innerHTML = '';
 }
 
-export { addProjectBox, addTask, addDeleteProjectOption, appendTaskToShownTasks, showTasks, showProjects, clearMainContent };
+export { addProjectBox, addTaskBox, addDeleteProjectOption, appendTaskToShownTasks, showTasks, showProjects, clearMainContent };
