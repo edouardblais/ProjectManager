@@ -89,22 +89,28 @@ function appendTaskToShownTasks() {
     const listedtasks = document.createElement('div');
     listedtasks.classList.add('listedtasks');
 
+    let taskchecked = document.createElement('img');
+    taskchecked.src = 'icons/circle.svg';
+    taskchecked.classList.add('circle');;
+
+    const tasktitleanddescriptionbox = document.createElement('div');
+    tasktitleanddescriptionbox.classList.add('tasktitleanddescriptionbox');
+    
     const gettasktitle = document.querySelector('.tasktitleinput').value;
     const divfortasktitleinput = document.createElement('div');
     divfortasktitleinput.innerText = gettasktitle;
 
-    let taskchecked = document.createElement('img');
-    taskchecked.src = 'icons/circle.svg';
-    taskchecked.classList.add('circle');
     taskchecked.id = gettasktitle;
 
     const gettaskdescription = document.querySelector('.taskdescriptioninput').value;
     const divfortaskdescriptioninput = document.createElement('div');
     divfortaskdescriptioninput.innerText = gettaskdescription;
+    divfortaskdescriptioninput.classList.add('descriptiontext');
 
     const gettaskresponsible = document.querySelector('.taskresponsibleinput').value;
     const divfortaskresponsibleinput = document.createElement('div');
     divfortaskresponsibleinput.innerText = gettaskresponsible;
+    divfortaskresponsibleinput.classList.add('taskresponsible');
 
     const gettaskpriority = document.querySelector('.taskpriority');
     let btnfortaskpriority = document.createElement('button');
@@ -122,6 +128,7 @@ function appendTaskToShownTasks() {
     const gettaskdatedue = document.querySelector('.taskdatedueinput').value;
     const divfortaskdatedueinput = document.createElement('div');
     divfortaskdatedueinput.innerText = gettaskdatedue;
+    divfortaskdatedueinput.classList.add('datedue');
 
     const deletebutton = document.createElement('img');
     deletebutton.classList.add('deletebutton');
@@ -129,8 +136,9 @@ function appendTaskToShownTasks() {
     deletebutton.id = gettasktitle;
 
     listedtasks.appendChild(taskchecked);
-    listedtasks.appendChild(divfortasktitleinput);
-    listedtasks.appendChild(divfortaskdescriptioninput);
+    tasktitleanddescriptionbox.appendChild(divfortasktitleinput);
+    tasktitleanddescriptionbox.appendChild(divfortaskdescriptioninput);
+    listedtasks.appendChild(tasktitleanddescriptionbox)
     listedtasks.appendChild(divfortaskresponsibleinput);
     listedtasks.appendChild(btnfortaskpriority);
     listedtasks.appendChild(divfortaskdatedueinput);
@@ -155,14 +163,19 @@ function showTasks(title, description, responsible, priority, duedate, checked) 
         taskchecked.id = title;
     };
 
+    const tasktitleanddescriptionbox = document.createElement('div');
+    tasktitleanddescriptionbox.classList.add('tasktitleanddescriptionbox');
+
     const divfortasktitleinput = document.createElement('div');
     divfortasktitleinput.innerText = title;
 
     const divfortaskdescriptioninput = document.createElement('div');
     divfortaskdescriptioninput.innerText = description;
+    divfortaskdescriptioninput.classList.add('descriptiontext');
 
     const divfortaskresponsibleinput = document.createElement('div');
     divfortaskresponsibleinput.innerText = responsible;
+    divfortaskresponsibleinput.classList.add('taskresponsible');
 
     let btnfortaskpriority = document.createElement('button');
     btnfortaskpriority.id = title;
@@ -178,6 +191,7 @@ function showTasks(title, description, responsible, priority, duedate, checked) 
 
     const divfortaskdatedueinput = document.createElement('div');
     divfortaskdatedueinput.innerText = duedate;
+    divfortaskdatedueinput.classList.add('datedue');
 
     const deletebutton = document.createElement('img');
     deletebutton.classList.add('deletebutton');
@@ -185,8 +199,9 @@ function showTasks(title, description, responsible, priority, duedate, checked) 
     deletebutton.id = title;
 
     listedtasks.appendChild(taskchecked);
-    listedtasks.appendChild(divfortasktitleinput);
-    listedtasks.appendChild(divfortaskdescriptioninput);
+    tasktitleanddescriptionbox.appendChild(divfortasktitleinput);
+    tasktitleanddescriptionbox.appendChild(divfortaskdescriptioninput);
+    listedtasks.appendChild(tasktitleanddescriptionbox);
     listedtasks.appendChild(divfortaskresponsibleinput);
     listedtasks.appendChild(btnfortaskpriority);
     listedtasks.appendChild(divfortaskdatedueinput);

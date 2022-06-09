@@ -161,7 +161,7 @@ input {
 
 .tasktitleresponsibleprioritydatebox {
     display: grid;
-    grid-template-columns: 3fr 3fr 1fr 2fr;
+    grid-template-columns: 4fr 4fr 1fr 3fr;
     grid-template-rows: 1fr 1fr;
     gap:1vh;
     grid-auto-flow: column;
@@ -188,8 +188,43 @@ input {
     border: var(--marine) 1px solid;
     border-radius: .5rem;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: .3vh;
+}
+
+.tasktitleanddescriptionbox {
+    display: flex;
+    flex-direction: column;
+    gap:.1vh;
+    flex:1;
+}
+
+.descriptiontext {
+    font-size: .9rem;
+    opacity:0.8;
+}
+
+.taskresponsible {
+    font-style: italic;
+}
+
+.datedue {
+    border:black 1px solid;
+    border-radius: .5rem;
+    padding: .5vh;
+}
+
+.taskpriority {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color:white;
+    outline: none;
+    border: 1px solid;
+    border-radius: .5rem;
+    width: 6vw;
+    height: 4vh;
+    text-align: center;
 }
 
 .prioritylow {
