@@ -81,15 +81,30 @@ const logic = () => {
 
     function inputNewProject() {
         const addprojectbutton = document.querySelector('.addprojbutton');
+        let projecttitleinput = document.getElementById('projecttitleinput');
     
         addprojectbutton.addEventListener(('click'), () => {
-            let projecttitleinput = document.getElementById('projecttitleinput');
-            const inputproject = Project(projecttitleinput.value);
-            projectlist.push(inputproject);
-            localStorage.setItem('projects', JSON.stringify(projectlist));
-            projecttitleinput.value = '';
-            displayProjects();
+            if (isAlreadyAProject() === true) {
+                alert('Project title already taken. Find a unique title!')
+            } else if (projecttitleinput.value === '') {
+                alert('Please enter a unique project title!')
+            } else {
+                const inputproject = Project(projecttitleinput.value);
+                projectlist.push(inputproject);
+                localStorage.setItem('projects', JSON.stringify(projectlist));
+                projecttitleinput.value = '';
+                displayProjects();
+            };
         });
+    };
+
+    function isAlreadyAProject() {
+        let projecttitleinput = document.getElementById('projecttitleinput');
+        for (let i=0; i<projectlist.length; i++) {
+            if (projectlist[i].getTitle === projecttitleinput.value) {
+                return true;
+            };
+        };
     };
 
     function displayProjects() {
