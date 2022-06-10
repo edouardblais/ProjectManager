@@ -27,26 +27,30 @@ function addTaskBox() {
     taskTitleResponsiblePriorityDatebox.classList.add('tasktitleresponsibleprioritydatebox');
     
     const tasktitle = document.createElement('div');
-    tasktitle.innerText = 'Task Title:'
+    tasktitle.innerText = 'Task Title'
+    tasktitle.classList.add('taskboxinfo');
     let tasktitleinput = document.createElement('input');
     tasktitleinput.classList.add('tasktitleinput');
     tasktitleinput.placeholder = 'Give me a fresh and unique name!'
 
     const taskresponsible = document.createElement('div');
-    taskresponsible.innerText = 'Assigned Person:';
+    taskresponsible.innerText = 'Assigned Person';
+    taskresponsible.classList.add('taskboxinfo');
     let taskresponsibleinput = document.createElement('input');
     taskresponsibleinput.classList.add('taskresponsibleinput');
     taskresponsibleinput.placeholder = "Whooo's going to do it?";
 
     const taskpriority = document.createElement('div');
-    taskpriority.innerText = 'Priority:';
+    taskpriority.innerText = 'Priority';
+    taskpriority.classList.add('taskboxinfo');
     let taskpriorityinput = document.createElement('button');
     taskpriorityinput.classList.add('taskpriority');
     taskpriorityinput.innerText = 'Low';
     taskpriorityinput.classList.add('prioritylow');
 
     const taskdatedue = document.createElement('div');
-    taskdatedue.innerText = 'Task due on:';
+    taskdatedue.innerText = 'Task due on';
+    taskdatedue.classList.add('taskboxinfo');
     let taskdatedueinput = document.createElement('input');
     taskdatedueinput.setAttribute('type', 'date');
     taskdatedueinput.classList.add('taskdatedueinput');
@@ -54,10 +58,11 @@ function addTaskBox() {
     const taskdescriptionbox = document.createElement('div');
     taskdescriptionbox.classList.add('taskdescriptionbox');
     const taskdescription = document.createElement('div');
-    taskdescription.innerText = 'Details:';
+    taskdescription.innerText = 'Details';
+    taskdescription.classList.add('taskboxinfo');
     let taskdescriptioninput = document.createElement('input');
     taskdescriptioninput.classList.add('taskdescriptioninput');
-    taskdescriptioninput.placeholder = "Give me the deets!"
+    taskdescriptioninput.placeholder = "Gimme the deets!"
 
     const addtaskbuttonbox = document.createElement('div');
     addtaskbuttonbox.classList.add('addtaskbuttonbox');
@@ -214,10 +219,17 @@ function showProjects(title) {
     const allprojects = document.getElementById('listedprojects');
 
     const listedproject = document.createElement('div');
-    listedproject.classList.add('listedprojects');
     listedproject.id = title;
-    listedproject.innerText = title;
+    listedproject.classList.add('listedproject');
+    const arrow = document.createElement('img');
+    arrow.src = 'icons/arrow.svg';
+    arrow.classList.add('icons');
+    const listedprojecttitle = document.createElement('div');
+    listedprojecttitle.classList.add('listedprojecttitle');
+    listedprojecttitle.innerText = title;
 
+    listedproject.appendChild(arrow);
+    listedproject.appendChild(listedprojecttitle);
     allprojects.appendChild(listedproject);
 };
 

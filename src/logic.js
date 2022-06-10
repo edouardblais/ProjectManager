@@ -113,12 +113,12 @@ const logic = () => {
 
     function viewChosenTasks() {
         document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('listedprojects')) {
+            if (event.target.classList.contains('listedprojecttitle')) {
                 clearMainContent();
                 addTaskBox();
                 getTasksFromStorage();
-                displayTasksForChosenProject(event.target.id);
-                inputNewTask(event.target.id);
+                displayTasksForChosenProject(event.target.parentNode.id);
+                inputNewTask(event.target.parentNode.id);
             } else if (event.target.id === 'important') {
                 clearMainContent();
                 getTasksFromStorage();
@@ -213,6 +213,8 @@ const logic = () => {
             taskresponsibleinput.value = '';
             taskdatedueeinput.value = '';
             taskpriority.innerText = 'Low';
+            taskpriority.classList.remove('priorityhigh');
+            taskpriority.classList.add('prioritylow');
         });
     };
 
