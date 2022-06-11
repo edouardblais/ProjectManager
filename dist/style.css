@@ -43,7 +43,7 @@ input {
     border-top: var(--green) solid 2px;
     height: 5vh;
     color:var(--marine);
-    font-size: 1.2rem;
+    font-size: 2.5vh;
     padding-top: .8vh;
     font-style: italic;
 }
@@ -71,18 +71,18 @@ input {
     background-color: var(--blue);
     color: white;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 3vh;
 }
 
 .icons, .deleteproject {
     filter: invert(100%) sepia(25%) saturate(0%) hue-rotate(255deg) brightness(107%) contrast(101%);
-    width: 1.5rem;
+    width: 2.5vh;
     height: auto;
 }
 
 .pushed {
     padding-left: 1.5vw;
-    font-size: 1.2rem;
+    font-size: 2.5vh;
 }
 
 .sidebartitles {
@@ -93,13 +93,13 @@ input {
 
 #logo {
     color: var(--marine);
-    font-size: 4rem;
+    font-size: 8vh;
     font-weight: 700;
 }
 
 #logoicon {
     filter: invert(62%) sepia(78%) saturate(488%) hue-rotate(40deg) brightness(99%) contrast(89%);
-    height: 3rem;
+    height: 6vh;
     width: auto;
 }
 
@@ -109,7 +109,7 @@ input {
 
 #heart {
     filter: invert(62%) sepia(78%) saturate(488%) hue-rotate(40deg) brightness(99%) contrast(89%);
-    height: 1.5rem;
+    height: 3vh;
     width: auto;
 }
 
@@ -136,7 +136,7 @@ input {
 .listedproject {
     display: flex;
     flex-direction: row;
-    font-size: 1.5rem;
+    font-size: 2.5vh;
 }
 
 #projecttitleinput {
@@ -152,7 +152,7 @@ input {
     outline:none;
     background-color: var(--green);
     color: white;
-    font-size: 1.3rem;
+    font-size: 2.5vh;
     font-weight: 700;
     text-align: center;
     border: transparent 1px solid;
@@ -185,7 +185,7 @@ input {
 }
 
 .taskboxinfo {
-    font-size: 1.2rem;
+    font-size: 2vh;
     font-weight: 700;
 }
 
@@ -236,7 +236,7 @@ input {
 }
 
 .descriptiontext {
-    font-size: .9rem;
+    font-size: 1.5vh;
     opacity:0.8;
 }
 
@@ -252,7 +252,7 @@ input {
 
 .taskpriority {
     font-family: 'Raleway', sans-serif;
-    font-size: 1.2rem;
+    font-size: 2vh;
     font-weight: 700;
     color:white;
     outline: none;
