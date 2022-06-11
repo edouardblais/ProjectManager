@@ -84,7 +84,7 @@ const logic = () => {
         let projecttitleinput = document.getElementById('projecttitleinput');
     
         addprojectbutton.addEventListener(('click'), () => {
-            if (isAlreadyAProject() === true) {
+            if (isAlreadyAProject()) {
                 alert('Project title already taken. Find a unique title!')
             } else if (projecttitleinput.value === '') {
                 alert('Please enter a unique project title!')
@@ -212,25 +212,40 @@ const logic = () => {
     function inputNewTask(id) {
         const addtaskbutton = document.querySelector('.addtaskbutton');
         const associatedprojectinput = id;
+        let tasktitleinput = document.querySelector('.tasktitleinput');
     
         addtaskbutton.addEventListener('click', () => {
-            let taskttitleinput = document.querySelector('.tasktitleinput');
-            let taskdescriptioneinput = document.querySelector('.taskdescriptioninput');
-            let taskresponsibleinput = document.querySelector('.taskresponsibleinput');
-            let taskdatedueeinput = document.querySelector('.taskdatedueinput');
-            let taskpriority = document.querySelector('.taskpriority');
-            const inputtask = Task(taskttitleinput.value, taskdescriptioneinput.value, taskresponsibleinput.value, taskpriority.innerText, taskdatedueeinput.value, associatedprojectinput, false);
-            tasklist.push(inputtask);
-            appendTaskToShownTasks();
-            localStorage.setItem('tasks', JSON.stringify(tasklist));
-            taskttitleinput.value = '';
-            taskdescriptioneinput.value = '';
-            taskresponsibleinput.value = '';
-            taskdatedueeinput.value = '';
-            taskpriority.innerText = 'Low';
-            taskpriority.classList.remove('priorityhigh');
-            taskpriority.classList.add('prioritylow');
+            if (isAlreadyATask()) {
+                alert('Task title already taken. Choose a unique task title!');
+            } else if (tasktitleinput.value === '') {
+                alert('Please choose a unique task title!')
+            } else {
+                let taskdescriptioneinput = document.querySelector('.taskdescriptioninput');
+                let taskresponsibleinput = document.querySelector('.taskresponsibleinput');
+                let taskdatedueeinput = document.querySelector('.taskdatedueinput');
+                let taskpriority = document.querySelector('.taskpriority');
+                const inputtask = Task(tasktitleinput.value, taskdescriptioneinput.value, taskresponsibleinput.value, taskpriority.innerText, taskdatedueeinput.value, associatedprojectinput, false);
+                tasklist.push(inputtask);
+                appendTaskToShownTasks();
+                localStorage.setItem('tasks', JSON.stringify(tasklist));
+                tasktitleinput.value = '';
+                taskdescriptioneinput.value = '';
+                taskresponsibleinput.value = '';
+                taskdatedueeinput.value = '';
+                taskpriority.innerText = 'Low';
+                taskpriority.classList.remove('priorityhigh');
+                taskpriority.classList.add('prioritylow');
+            };
         });
+    };
+
+    function isAlreadyATask() {
+        let tasktitleinput = document.querySelector('.tasktitleinput');
+        for (let i=0; i<tasklist.length; i++) {
+            if (tasklist[i].getTitle === tasktitleinput.value) {
+                return true;
+            };
+        };
     };
 
     function deleteTask() {

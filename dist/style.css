@@ -6,10 +6,15 @@
 
 :root {
     --green: #84cc16;
+    --darkgreen: #65a30d;
     --marine: #0c4a6e;
     --lightblue: #e0f2fe;
     --blue: #0369a1;
     --lightgreen:#f0fdf4;
+    --pink: #fecaca;
+    --darkpink: #fca5a5;
+    --red:#dc2626;
+    --darkred: #b91c1c;
     font-family: 'Raleway', sans-serif;
     font-size: 1rem;
 }
@@ -86,10 +91,6 @@ input {
     flex-direction: column;
 }
 
-.sidebartitles:hover {
-    cursor: pointer;
-}
-
 #logo {
     color: var(--marine);
     font-size: 4rem;
@@ -160,8 +161,16 @@ input {
     width: 10vw;
 }
 
-.addprojbutton:hover, .addtaskbutton:hover, .taskpriority:hover, .deletebutton:hover, .circle:hover, .check:hover {
+.addprojbutton:hover, .addtaskbutton:hover, .taskpriority:hover, .deletebutton:hover, .circle:hover, .check:hover, .pushed:hover {
     cursor: pointer;
+}
+
+.pushed:hover {
+    color:#84cc16;
+}
+
+.addprojbutton:hover, .addtaskbutton:hover {
+    background-color: #65a30d;
 }
 
 .taskbox {
@@ -255,9 +264,17 @@ input {
 }
 
 .prioritylow {
-    background-color: pink;
+    background-color: var(--pink);
+}
+
+.prioritylow:hover {
+    background-color: var(--darkpink);
 }
 
 .priorityhigh {
-    background-color: red;
+    background-color: var(--red);
+}
+
+.priorityhigh:hover {
+    background-color: var(--darkred);
 }

@@ -132,7 +132,11 @@ function appendTaskToShownTasks() {
 
     const gettaskdatedue = document.querySelector('.taskdatedueinput').value;
     const divfortaskdatedueinput = document.createElement('div');
-    divfortaskdatedueinput.innerText = gettaskdatedue;
+    if (gettaskdatedue === '') {
+        divfortaskdatedueinput.innerText = 'No due date'
+    } else {
+        divfortaskdatedueinput.innerText = gettaskdatedue;
+    };
     divfortaskdatedueinput.classList.add('datedue');
 
     const deletebutton = document.createElement('img');
@@ -195,7 +199,11 @@ function showTasks(title, description, responsible, priority, duedate, checked) 
     };
 
     const divfortaskdatedueinput = document.createElement('div');
-    divfortaskdatedueinput.innerText = duedate;
+    if (duedate === '') {
+        divfortaskdatedueinput.innerText = 'No due date'
+    } else {
+        divfortaskdatedueinput.innerText = duedate;
+    };
     divfortaskdatedueinput.classList.add('datedue');
 
     const deletebutton = document.createElement('img');
